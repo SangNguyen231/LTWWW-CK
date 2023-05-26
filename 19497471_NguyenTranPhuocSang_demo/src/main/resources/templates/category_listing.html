@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>19497471_NguyenTranPhuocSang</title>
+<style>
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+</style>
+</head>
+<body>
+	<div>
+		<h1>List Category</h1>
+		<hr />
+		<a th:href="@{/categorys/showAddForm}">Add new product</a>
+		<br/><br/>
+		<div>
+			<table>
+				<tr>
+					<th>Category Id</th>
+					<th>Category name</th>
+					<th>Action</th>
+				</tr>
+				<tr th:each="category:${categorys}">
+					<td th:text="${category.categoryId}" />
+					<td th:text="${category.categoryName}" />
+					<td>
+						<a th:href="@{/categorys/delete(id=${category.categoryId})}">Delete</a>
+						<a th:href="@{/categorys/showUpdateForm(id=${category.categoryId})}">Update</a>
+					</td>
+				</tr>
+			</table>
+		</div>
+	</div>
+</body>
+</html>

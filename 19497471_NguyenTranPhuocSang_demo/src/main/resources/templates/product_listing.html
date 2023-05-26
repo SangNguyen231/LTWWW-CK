@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>19497471_NguyenTranPhuocSang</title>
+<style>
+table {
+	font-family: arial, sans-serif;
+	border-collapse: collapse;
+	width: 100%;
+}
+
+td, th {
+	border: 1px solid #dddddd;
+	text-align: left;
+	padding: 8px;
+}
+
+tr:nth-child(even) {
+	background-color: #dddddd;
+}
+</style>
+</head>
+<body>
+	<div>
+		<h1>List Product</h1>
+		<hr />
+		<div style="display: flex; flex-direction: row"> 
+			<form method="get" th:action="@{/products/category}" th:object="category">
+				<select th:field="*{categoryId}">
+					<option th:each="category:${categorys}"
+						th:value="${category.categoryId}"
+						th:text="${category.categoryName}"
+						></option>
+				</select> <input type="submit" value="Tim" />
+			</form>
+		</div>
+		<hr />
+		<a th:href="@{/products/showAddForm}">Add new product</a> <br />
+		<br />
+		<div>
+			<table>
+				<tr>
+					<th>Product Id</th>
+					<th>Product name</th>
+					<th>Created date</th>
+					<th>Category</th>
+					<th>Action</th>
+				</tr>
+				<tr th:each="product:${products}">
+					<td th:text="${product.productId}" />
+					<td th:text="${product.productName}" />
+					<td th:text="${product.productDate}" />
+					<td th:text="${product.category.categoryName}" />
+					<td><a th:href="@{/products/delete(id=${product.productId})}">Delete</a>
+						<a th:href="@{/products/showUpdateForm(id=${product.productId})}">Update</a>
+					</td>
+				</tr>
+			</table>
+		</div>
+	</div>
+</body>
+</html>
